@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2676mpglh82l"
-path="res://.godot/imported/TetrisTiles.png-94976e3fda44d2cff738c24b0b0b338c.ctex"
+path="res://.godot/imported/TetrisTiles.png-dc65883e9f5d3c1d05fd18bf4e0d57ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TetrisTiles.png"
-dest_files=["res://.godot/imported/TetrisTiles.png-94976e3fda44d2cff738c24b0b0b338c.ctex"]
+source_file="res://assets/TetrisTiles.png"
+dest_files=["res://.godot/imported/TetrisTiles.png-dc65883e9f5d3c1d05fd18bf4e0d57ff.ctex"]
 
 [params]
 
