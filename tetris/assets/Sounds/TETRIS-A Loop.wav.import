@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bdv0y1o65d2l"
+path="res://.godot/imported/TETRIS-A Loop.wav-81b51673f3829ebaf8a3fc268bed2f76.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/TETRIS-A Loop.wav"
+dest_files=["res://.godot/imported/TETRIS-A Loop.wav-81b51673f3829ebaf8a3fc268bed2f76.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
