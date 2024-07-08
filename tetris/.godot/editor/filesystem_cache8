@@ -1,6 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1720335928
-board.tscn::PackedScene::4999767032112397654::1720334118::0::1::::<><>::
-::res://assets/::1720335889
-TetrisTiles.png::CompressedTexture2D::4347514129415301517::1720335703::1720335885::1::::<><>::
-::res://scenes/::1720335928
+::res://::1720400575
+::res://assets/::1720400575
+gridtile.png::CompressedTexture2D::6522697161421186070::1720335898::1720400575::1::::<><>::
+TetrisTiles.png::CompressedTexture2D::4347514129415301517::1720335966::1720335966::1::::<><>::
+::res://assets/Sounds/::1720401101
+MoveTile_Left.wav::AudioStreamWAV::3136551544299009512::1720380716::1720400575::1::::<><>::
+MoveTile_Place.wav::AudioStreamWAV::6755364014913213982::1720392791::1720400575::1::::<><>::
+MoveTile_Right.wav::AudioStreamWAV::3709898583006945665::1720380131::1720400575::1::::<><>::
+MoveTile_Rotate.wav::AudioStreamWAV::2905662808694628407::1720380837::1720400575::1::::<><>::
+TETRIS-A Loop.wav::AudioStreamWAV::77702979999953997::1720401056::1720401125::1::::<><>::
+::res://scenes/::1720335966
+board.tscn::PackedScene::4999767032112397654::1720335966::0::1::::<><>::
