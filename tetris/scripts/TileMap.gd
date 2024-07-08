@@ -65,6 +65,7 @@ var next_piece_type
 var rotation_index : int = 0
 var dontfuckingmove = false
 var active_piece : Array
+var play_sfx : bool
 
 #game variables
 var score : int
@@ -116,13 +117,17 @@ func _process(delta):
 		
 		if Input.is_action_just_pressed("rotate"):
 			rotate_piece()
+			$Rotate.play()
 		
 		#gravity
 		steps[2] += speed
 		#move the piece
 		for i in range(steps.size()):
 			if steps[i] > STEPS_REQ:
-				move_piece(DIRECTIONS[i])
+				if i == 0 or i == 1:
+					play_sfx = true
+				move_piece(DIRECTIONS[i], play_sfx)
+				play_sfx = false
 				steps[i] = 0
 
 func pick_piece():
@@ -160,27 +165,42 @@ func rotate_piece():
 		active_piece = piece_type[rotation_index]
 		draw_piece(active_piece, cur_pos, piece_atlas)
 
-func move_piece(dir):
+func move_piece(dir, sfx):
 	if not dontfuckingmove:
 		if can_move(dir):
 			clear_piece()
 			cur_pos += dir
+			if sfx:
+				if type_convert(dir, TYPE_INT) > 0: 
+					$MoveLeft.play()
+				else:
+					$MoveRight.play()
 			draw_piece(active_piece, cur_pos, piece_atlas)
 		else:
 			if not can_move(dir) and dir == Vector2i.DOWN:
 				dontfuckingmove = true
 				await get_tree().create_timer(1).timeout
-				land_piece()
-				check_rows()
-				piece_type = next_piece_type
-				piece_atlas = next_piece_atlas
-				next_piece_type = pick_piece()
-				next_piece_atlas = Vector2i(shapes_full.find(next_piece_type), 0)
-				clear_panel()
-				create_piece()
-				check_game_over()
-				await get_tree().create_timer(0.35).timeout
-				dontfuckingmove = false
+				if can_move(dir):
+					clear_piece()
+					cur_pos += dir
+					if sfx:
+						if type_convert(dir, TYPE_INT) > 0:
+							$MoveLeft.play()
+						else:
+							$MoveRight.play()
+					draw_piece(active_piece, cur_pos, piece_atlas)
+				else: 
+					land_piece()
+					check_rows()
+					piece_type = next_piece_type
+					piece_atlas = next_piece_atlas
+					next_piece_type = pick_piece()
+					next_piece_atlas = Vector2i(shapes_full.find(next_piece_type), 0)
+					clear_panel()
+					create_piece()
+					check_game_over()
+					await get_tree().create_timer(0.1).timeout
+					dontfuckingmove = false
 
 func can_move(dir):
 	#check if there is space to move
@@ -203,6 +223,7 @@ func is_free(pos):
 
 func land_piece():
 	#remove each segment from the active layer and move to board layer
+	$Place.play()
 	for i in active_piece:
 		erase_cell(active_layer, cur_pos + i)
 		set_cell(board_layer, cur_pos + i, tile_id, piece_atlas)
