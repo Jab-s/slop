@@ -1,10 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1720409405
-board.tscn::PackedScene::-1::1720409405::0::1::::<><>::
-TileMap.gd::GDScript::-1::1720409405::0::1::::<>TileMap<>::
-::res://assets/::1720409442
-gridtile.png::CompressedTexture2D::-1::1720409405::1720409405::1::::<><>::
+::res://::1720422195
+TileMap.gd::GDScript::-1::1720422161::0::1::::<>TileMap<>::
+::res://assets/::1720417893
+background.png::CompressedTexture2D::8403804104293904615::1720417888::1720417893::1::::<><>::
+bordertile_tileset.png::CompressedTexture2D::3998051864303542546::1720417888::1720417893::1::::<><>::
 fellas.tscn::PackedScene::6640323695167748037::1720409442::0::1::::<><>::
+gridtile.png::CompressedTexture2D::6522697161421186070::1720409405::1720409405::1::::<><>::
 TetrisTiles.png::CompressedTexture2D::4347514129415301517::1720335703::1720335885::1::::<><>::
 ::res://assets/Sounds/::1720409405
 MoveTile_Left.wav::AudioStreamWAV::3136551544299009512::1720409405::1720409405::1::::<><>::
@@ -12,4 +13,7 @@ MoveTile_Place.wav::AudioStreamWAV::6755364014913213982::1720409405::1720409405:
 MoveTile_Right.wav::AudioStreamWAV::3709898583006945665::1720409405::1720409405::1::::<><>::
 MoveTile_Rotate.wav::AudioStreamWAV::2905662808694628407::1720409405::1720409405::1::::<><>::
 TETRIS-A Loop.wav::AudioStreamWAV::77702979999953997::1720409405::1720409405::1::::<><>::
-::res://scenes/::1720409450
+::res://scenes/::1720422173
+board.tscn::PackedScene::1886175374995469314::1720422197::0::1::::<><>::uid://b2676mpglh82l::::res://assets/TetrisTiles.png<>res://TileMap.gd<>uid://cy6v4s42vonpe::::res://assets/gridtile.png<>uid://bw7xlhts8okg5::::res://assets/bordertile_tileset.png<>uid://btde4vcxseyy5::::res://scenes/hud.tscn
+hud.tscn::PackedScene::3726497609221419982::1720414808::0::1::::<><>::
+::res://scripts/::1720422195

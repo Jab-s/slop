@@ -53,18 +53,23 @@ const ROWS : int = 20
 #movement variables
 const DIRECTIONS := [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.DOWN]
 var steps : Array
-const STEPS_REQ : int = 90
+const STEPS_REQ : int = 60
 const START_POS := Vector2i(5, 1)
 var cur_pos : Vector2i
 var speed: float
+const ACCEL : float = 0.25
 
 #game piece variables
 var piece_type
 var next_piece_type
 var rotation_index : int = 0
-var rotate_cd : int = 30
 var dontfuckingmove = false
 var active_piece : Array
+
+#game variables
+var score : int
+const REWARD : int = 100
+var game_running : bool
 
 #tilemap variables
 var tile_id : int = 0
@@ -78,12 +83,20 @@ var active_layer : int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game()
+	$HUD.get_node("StartButton").pressed.connect(new_game)
 
 func new_game():
 	#reset variables
+	game_running = true
+	score = 0
+	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score)
 	speed = 1.0
 	steps = [0, 0, 0] #0: left, 1:right, 2:down
 	$HUD.get_node("GameOverLabel").hide()
+	#clear everything
+	clear_piece()
+	clear_board()
+	clear_panel()
 	piece_type = pick_piece()
 	piece_atlas = Vector2i(shapes_full.find(piece_type), 0)
 	next_piece_type = pick_piece()
@@ -93,27 +106,24 @@ func new_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("down"):
-		steps[2] += 5
-	elif Input.is_action_pressed("right"):
-		steps[1] += 10
-	elif Input.is_action_pressed("left"):
-		steps[0] += 10
-	
-	if Input.is_action_pressed("rotate"):
-		if rotate_cd == 0:
+	if game_running:
+		if Input.is_action_pressed("down"):
+			steps[2] += 5
+		elif Input.is_action_pressed("right"):
+			steps[1] += 10
+		elif Input.is_action_pressed("left"):
+			steps[0] += 10
+		
+		if Input.is_action_just_pressed("rotate"):
 			rotate_piece()
-			rotate_cd = 30
-	
-	#gravity
-	steps[2] += speed
-	if rotate_cd > 0:
-		rotate_cd -= speed
-	#move the piece
-	for i in range(steps.size()):
-		if steps[i] > STEPS_REQ:
-			move_piece(DIRECTIONS[i])
-			steps[i] = 0
+		
+		#gravity
+		steps[2] += speed
+		#move the piece
+		for i in range(steps.size()):
+			if steps[i] > STEPS_REQ:
+				move_piece(DIRECTIONS[i])
+				steps[i] = 0
 
 func pick_piece():
 	var piece
@@ -153,7 +163,6 @@ func rotate_piece():
 func move_piece(dir):
 	if not dontfuckingmove:
 		if can_move(dir):
-			print("ok")
 			clear_piece()
 			cur_pos += dir
 			draw_piece(active_piece, cur_pos, piece_atlas)
@@ -162,12 +171,14 @@ func move_piece(dir):
 				dontfuckingmove = true
 				await get_tree().create_timer(1).timeout
 				land_piece()
+				check_rows()
 				piece_type = next_piece_type
 				piece_atlas = next_piece_atlas
 				next_piece_type = pick_piece()
 				next_piece_atlas = Vector2i(shapes_full.find(next_piece_type), 0)
 				clear_panel()
 				create_piece()
+				check_game_over()
 				await get_tree().create_timer(0.35).timeout
 				dontfuckingmove = false
 
@@ -200,3 +211,41 @@ func clear_panel():
 	for i in range(14, 19):
 		for j in range(5, 9):
 			erase_cell(active_layer, Vector2i(i, j))
+
+func check_rows():
+	var row : int = ROWS
+	while row > 0:
+		var count = 0
+		for i in range(COLS):
+			if not is_free(Vector2i(i + 1, row)):
+				count += 1
+			#if row is full then erase it
+		if count == COLS:
+			shift_rows(row)
+			score += REWARD
+			$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score)
+			speed += ACCEL
+		else:
+			row -= 1
+
+func shift_rows(row):
+	var atlas
+	for i in range(row, 1, -1):
+		for j in range(COLS):
+			atlas = get_cell_atlas_coords(board_layer, Vector2i(j + 1, i - 1))
+			if atlas == Vector2i(-1, -1):
+				erase_cell(board_layer, Vector2i(j + 1, i))
+			else:
+				set_cell(board_layer, Vector2i(j + 1, i), tile_id, atlas)
+
+func clear_board():
+	for i in range(ROWS):
+		for j in range(COLS):
+			erase_cell(board_layer,Vector2i(j + 1, i + 1))
+
+func check_game_over():
+	for i  in active_piece:
+		if not is_free(i + cur_pos):
+			land_piece()
+			$HUD.get_node("GameOverLabel").show()
+			game_running = false

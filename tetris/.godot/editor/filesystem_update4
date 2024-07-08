@@ -1,3 +1,4 @@
 res://scenes/board.tscn
 res://TileMap.gd
 res://scenes/hud.tscn
+res://scripts/TileMap.gd
