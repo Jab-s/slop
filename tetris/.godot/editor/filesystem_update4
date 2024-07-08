@@ -1,1 +1,2 @@
-res://board.tscn
+res://scenes/board.tscn
+res://TileMap.gd
