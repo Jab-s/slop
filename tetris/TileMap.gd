@@ -63,6 +63,7 @@ var piece_type
 var next_piece_type
 var rotation_index : int = 0
 var rotate_cd : int = 30
+var dontfuckingmove = false
 var active_piece : Array
 
 #tilemap variables
@@ -82,9 +83,11 @@ func new_game():
 	#reset variables
 	speed = 1.0
 	steps = [0, 0, 0] #0: left, 1:right, 2:down
-	
+	$HUD.get_node("GameOverLabel").hide()
 	piece_type = pick_piece()
 	piece_atlas = Vector2i(shapes_full.find(piece_type), 0)
+	next_piece_type = pick_piece()
+	next_piece_atlas = Vector2i(shapes_full.find(next_piece_type), 0)
 	create_piece()
 
 
@@ -93,9 +96,9 @@ func _process(delta):
 	if Input.is_action_pressed("down"):
 		steps[2] += 5
 	elif Input.is_action_pressed("right"):
-		steps[1] += 5
+		steps[1] += 10
 	elif Input.is_action_pressed("left"):
-		steps[0] += 5
+		steps[0] += 10
 	
 	if Input.is_action_pressed("rotate"):
 		if rotate_cd == 0:
@@ -129,6 +132,8 @@ func create_piece():
 	cur_pos = START_POS
 	active_piece = piece_type[rotation_index]
 	draw_piece(active_piece, cur_pos, piece_atlas)
+	#show next piece
+	draw_piece(next_piece_type[0], Vector2i(15, 6), next_piece_atlas)
 
 func clear_piece():
 	for i in active_piece:
@@ -146,10 +151,25 @@ func rotate_piece():
 		draw_piece(active_piece, cur_pos, piece_atlas)
 
 func move_piece(dir):
-	if can_move(dir):
-		clear_piece()
-		cur_pos += dir
-		draw_piece(active_piece, cur_pos, piece_atlas)
+	if not dontfuckingmove:
+		if can_move(dir):
+			print("ok")
+			clear_piece()
+			cur_pos += dir
+			draw_piece(active_piece, cur_pos, piece_atlas)
+		else:
+			if not can_move(dir) and dir == Vector2i.DOWN:
+				dontfuckingmove = true
+				await get_tree().create_timer(1).timeout
+				land_piece()
+				piece_type = next_piece_type
+				piece_atlas = next_piece_atlas
+				next_piece_type = pick_piece()
+				next_piece_atlas = Vector2i(shapes_full.find(next_piece_type), 0)
+				clear_panel()
+				create_piece()
+				await get_tree().create_timer(0.35).timeout
+				dontfuckingmove = false
 
 func can_move(dir):
 	#check if there is space to move
@@ -169,3 +189,14 @@ func can_rotate():
 
 func is_free(pos):
 	return get_cell_source_id(board_layer, pos) == -1
+
+func land_piece():
+	#remove each segment from the active layer and move to board layer
+	for i in active_piece:
+		erase_cell(active_layer, cur_pos + i)
+		set_cell(board_layer, cur_pos + i, tile_id, piece_atlas)
+
+func clear_panel():
+	for i in range(14, 19):
+		for j in range(5, 9):
+			erase_cell(active_layer, Vector2i(i, j))
