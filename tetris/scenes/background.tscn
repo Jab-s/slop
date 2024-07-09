@@ -1,6 +1,7 @@
-[gd_scene load_steps=1028 format=3 uid="uid://c0gtj1q5k03cy"]
+[gd_scene load_steps=1029 format=3 uid="uid://c0gtj1q5k03cy"]
 
 [ext_resource type="Texture2D" uid="uid://bbh8og5cavh4j" path="res://assets/spritesheet2.png" id="2_3rvxa"]
+[ext_resource type="Texture2D" uid="uid://bl3a27cx54bur" path="res://assets/tetris.png" id="2_sesp1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwrva"]
 atlas = ExtResource("2_3rvxa")
@@ -7195,3 +7196,9 @@ position = Vector2(548.313, 346.844)
 rotation = 4.71009
 scale = Vector2(11.4023, 5.22533)
 texture = SubResource("GradientTexture2D_ejtyk")
+
+[node name="Tetris" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(534, 58)
+scale = Vector2(1.10112, 1.5625)
+texture = ExtResource("2_sesp1")

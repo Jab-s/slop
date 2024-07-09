@@ -1,11 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1720473525
-::res://assets/::1720474087
+::res://::1720493617
+::res://assets/::1720495539
 background.png::CompressedTexture2D::8403804104293904615::1720416418::1720422786::1::::<><>::
 bordertile_tileset.png::CompressedTexture2D::3998051864303542546::1720416135::1720422786::1::::<><>::
 gridtile2.png::CompressedTexture2D::4011240976606978040::1720474087::1720474087::1::::<><>::
 gridtile.png::CompressedTexture2D::6522697161421186070::1720335898::1720400575::1::::<><>::
+gridtile_alt 2.png::CompressedTexture2D::3184337399559120311::1720493700::1720493701::1::::<><>::
 spritesheet2.png::CompressedTexture2D::2473089195061452391::1720473523::1720473526::1::::<><>::
+tetris.png::CompressedTexture2D::3216350442183623141::1720495539::1720495539::1::::<><>::
 TetrisTiles.png::CompressedTexture2D::4347514129415301517::1720335966::1720335966::1::::<><>::
 th-471212309.jpeg::CompressedTexture2D::4231661342321347597::1720464812::1720467708::1::::<><>::
 ::res://assets/Sounds/::1720424733
@@ -14,12 +16,12 @@ MoveTile_Place.wav::AudioStreamWAV::6755364014913213982::1720392791::1720400575:
 MoveTile_Right.wav::AudioStreamWAV::3709898583006945665::1720380131::1720400575::1::::<><>::
 MoveTile_Rotate.wav::AudioStreamWAV::2905662808694628407::1720380837::1720400575::1::::<><>::
 TETRIS-A Loop.wav::AudioStreamWAV::77702979999953997::1720419707::1720424733::1::::<><>::
-::res://scenes/::1720474009
+::res://scenes/::1720495527
 AnimatedSprite2D.gd::GDScript::-1::1720468252::0::1::::<>AnimatedSprite2D<>::
-background.gdshader::Shader::-1::1720474009::0::1::::<><>::
-background.tscn::PackedScene::6541119811570492788::1720474009::0::1::::<><>::uid://dry4oqhd6tgt8::::res://assets/background.png<>uid://bbh8og5cavh4j::::res://assets/spritesheet2.png
-board.tscn::PackedScene::1886175374995469314::1720474009::0::1::::<><>::uid://b2676mpglh82l::::res://assets/TetrisTiles.png<>res://scripts/TileMap.gd<>uid://cy6v4s42vonpe::::res://assets/gridtile.png<>uid://bw7xlhts8okg5::::res://assets/bordertile_tileset.png<>uid://btde4vcxseyy5::::res://scenes/hud.tscn<>uid://bxfcs2cvocp2w::::res://assets/gridtile2.png<>uid://bdv0y1o65d2l::::res://assets/Sounds/TETRIS-A Loop.wav<>uid://bkxmss2mcup6o::::res://assets/Sounds/MoveTile_Left.wav<>uid://bs4dqtyf05xph::::res://assets/Sounds/MoveTile_Right.wav<>uid://c3il4gi1etd47::::res://assets/Sounds/MoveTile_Place.wav<>uid://bhnr3vjqegn0b::::res://assets/Sounds/MoveTile_Rotate.wav<>uid://c0gtj1q5k03cy::::res://scenes/background.tscn
-hud.gdshader::Shader::-1::1720474009::0::1::::<><>::
-hud.tscn::PackedScene::3726497609221419982::1720474009::0::1::::<><>::
+background.gdshader::Shader::-1::1720495527::0::1::::<><>::
+background.tscn::PackedScene::6541119811570492788::1720495527::0::1::::<><>::uid://bbh8og5cavh4j::::res://assets/spritesheet2.png
+board.tscn::PackedScene::1886175374995469314::1720495526::0::1::::<><>::uid://b2676mpglh82l::::res://assets/TetrisTiles.png<>res://scripts/TileMap.gd<>uid://cy6v4s42vonpe::::res://assets/gridtile.png<>uid://bw7xlhts8okg5::::res://assets/bordertile_tileset.png<>uid://btde4vcxseyy5::::res://scenes/hud.tscn<>uid://bxfcs2cvocp2w::::res://assets/gridtile2.png<>uid://bdv0y1o65d2l::::res://assets/Sounds/TETRIS-A Loop.wav<>uid://blmrto6nxmn32::::res://assets/gridtile_alt 2.png<>uid://bkxmss2mcup6o::::res://assets/Sounds/MoveTile_Left.wav<>uid://bs4dqtyf05xph::::res://assets/Sounds/MoveTile_Right.wav<>uid://c3il4gi1etd47::::res://assets/Sounds/MoveTile_Place.wav<>uid://bhnr3vjqegn0b::::res://assets/Sounds/MoveTile_Rotate.wav<>uid://c0gtj1q5k03cy::::res://scenes/background.tscn
+hud.gdshader::Shader::-1::1720495527::0::1::::<><>::
+hud.tscn::PackedScene::3726497609221419982::1720495527::0::1::::<><>::
 ::res://scripts/::1720424733
 TileMap.gd::GDScript::-1::1720424733::0::1::::<>TileMap<>::
