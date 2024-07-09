@@ -1,4 +1,6 @@
 res://scenes/board.tscn
-res://TileMap.gd
+res://scenes/background.gdshader
+res://scenes/background.tscn
 res://scenes/hud.tscn
-res://scripts/TileMap.gd
+res://scenes/hud.gdshader
+res://scenes/AnimatedSprite2D.gd
